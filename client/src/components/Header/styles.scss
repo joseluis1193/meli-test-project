@@ -1,0 +1,53 @@
+.app-header-container {
+  display: flex;
+  align-items: center;
+  background-color: #FFE600;
+  height: 60px;
+
+  .app-header {
+    display: flex;
+    align-items: center;
+    padding: 0 150px;
+    width: 100%;
+
+    .app-header-logo {
+      height: 30px;
+    }
+
+    .app-header-form {
+      padding: 0 20px;
+      width: 100%;
+
+      & form {
+        display: flex;
+        justify-content: center;
+
+        >input {
+          color: #333333;
+          font-size: 18px;
+          border: none;
+          text-decoration: none;
+          outline: none;
+          padding: 8px 0 8px 13px;
+          width: 92%;
+
+          ::placeholder {
+            color: #999999
+          }
+        }
+
+        >button {
+          background-color: #eeeeee;
+          border: none;
+          text-decoration: none;
+          cursor: pointer;
+          width: 40px;
+
+          img {
+            height: 17px;
+          }
+        }
+      }
+    }
+  }
+}

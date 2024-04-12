@@ -4,12 +4,15 @@
   "description": "Proyecto para el challenge de Mercado Libre - Frontend (Jose Luis Losada)",
   "main": "index.js",
   "scripts": {
+    "start": "node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.8",
+    "cors": "^2.8.5",
     "express": "^4.19.2"
   }
 }
