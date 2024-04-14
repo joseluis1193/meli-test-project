@@ -1,14 +1,17 @@
+import { Outlet } from "react-router-dom";
+import "./styles.scss";
+
 import Header from "../components/Header"
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <>
       <Header />
       <main>
-        {children}
+        <Outlet />
       </main>
     </>
-  )
+  );
 }
 
 export default Layout

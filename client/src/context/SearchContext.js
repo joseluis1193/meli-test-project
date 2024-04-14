@@ -1,23 +1,25 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from "react";
 
 // Services
-import { searchService } from '../services/search';
+import { searchService } from "../services/search";
 
 const SearchContext = createContext();
 
 export const SearchProvider = ({ children }) => {
-  const [search, setSearch] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState(null);
 
   const fetchData = async () => {
     if (search) {
       try {
         const data = await searchService(search);
-        console.log(data);
+
         setSearchResults(data);
       } catch (error) {
-        console.error('Error searching');
+        console.error("Error searching");
       }
+    } else {
+      setSearchResults(null);
     }
   };
 
@@ -27,7 +29,7 @@ export const SearchProvider = ({ children }) => {
   }, [search]);
 
   return (
-    <SearchContext.Provider value={{ search, setSearch, searchResults }}>
+    <SearchContext.Provider value={{ setSearch, searchResults }}>
       {children}
     </SearchContext.Provider>
   );

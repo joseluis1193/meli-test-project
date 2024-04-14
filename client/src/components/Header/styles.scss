@@ -1,14 +1,16 @@
 .app-header-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: #FFE600;
   height: 60px;
 
   .app-header {
     display: flex;
     align-items: center;
-    padding: 0 150px;
+    padding: 0 90px;
     width: 100%;
+    max-width: 1000px;
 
     .app-header-logo {
       height: 30px;
@@ -41,7 +43,7 @@
           border: none;
           text-decoration: none;
           cursor: pointer;
-          width: 40px;
+          width: 7%;
 
           img {
             height: 17px;

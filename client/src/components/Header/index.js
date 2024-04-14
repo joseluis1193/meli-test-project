@@ -1,9 +1,14 @@
-import { useContext, useState } from "react";
-import './styles.scss'
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import "./styles.scss"
 
-import SearchContext from '../../context/SearchContext';
+// Context
+import SearchContext from "../../context/SearchContext";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
   const { setSearch } = useContext(SearchContext);
 
   const [value, setValue] = useState("");
@@ -12,7 +17,24 @@ const Header = () => {
     event.preventDefault();
 
     setSearch(value);
+    navigate({
+      pathname: value ? "/items" : "/",
+      search: value ? `?search=${value}` : ""
+    });
   };
+
+  useEffect(() => {
+    const query = searchParams.get("search");
+    setValue(query || "");
+
+    setSearch(query);
+
+    if (!query) {
+      navigate("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <header className="app-header-container">
@@ -38,7 +60,7 @@ const Header = () => {
         </div>
       </header>
     </>
-  )
+  );
 }
 
 export default Header
