@@ -1,0 +1,51 @@
+.app-item-ol {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+
+  .app-item-li {
+    display: flex;
+    background-color: #fff;
+    padding: 16px 0;
+    border-bottom: 1px solid #eeeeee;
+
+    .app-item-image {
+      margin: 0 16px;
+      width: 180px;
+      height: 180px;
+      border-radius: 4px;
+    }
+
+    .app-item-info-container {
+      margin-top: 16px;
+
+      .app-item-price-container {
+        label {
+          font-size: 24px;
+          position: relative;
+          color: #333333;
+
+          span {
+            font-size: 15px;
+            position: absolute;
+            top: 0.2em;
+            color: #333333;
+          }
+        }
+
+        .app-item-icon-free-shipping {
+          margin-left: 30px;
+          height: 20px;
+        }
+      }
+
+      .app-item-text {
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 1.3;
+        margin: 32px 0 0;
+        color: #333333;
+      }
+    }
+  }
+}
