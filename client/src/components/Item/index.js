@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import "./styles.scss";
 
 // Context
@@ -33,18 +34,22 @@ const Item = () => {
 
                 {result.free_shipping &&
                   <img
-                    src="./images/icon-free-shipping.png"
+                    src="/images/icon-free-shipping.png"
                     alt="icon-free-shipping"
                     className="app-item-icon-free-shipping"
                   />
                 }
+
+                <div className="app-item-seller-address">
+                  <label>{result.seller_address}</label>
+                </div>
               </div>
 
-              <>
-                <p className="app-item-text">
+              <div className="app-item-text-container">
+                <Link to={`/items/${result.id}`} className="app-item-text">
                   {`${result.title} Igual a ${CONDITION_ITEM[result.condition]}` || ""}
-                </p>
-              </>
+                </Link>
+              </div>
             </div>
           </li>
         ))}
@@ -53,4 +58,4 @@ const Item = () => {
   );
 }
 
-export default Item
+export default Item;

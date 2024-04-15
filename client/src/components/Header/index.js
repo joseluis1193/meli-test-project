@@ -8,10 +8,12 @@ import SearchContext from "../../context/SearchContext";
 const Header = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-
   const { setSearch } = useContext(SearchContext);
 
+  const query = searchParams.get("search");
+
   const [value, setValue] = useState("");
+
 
   const handleSearch = async (event) => {
     event.preventDefault();
@@ -24,22 +26,16 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const query = searchParams.get("search");
     setValue(query || "");
-
     setSearch(query);
-
-    if (!query) {
-      navigate("/");
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [query]);
 
   return (
     <>
       <header className="app-header-container">
         <div className="app-header">
-          <img src="./images/logo.png" alt="logo" className="app-header-logo" />
+          <img src="/images/logo.png" alt="logo" className="app-header-logo" />
 
           <div className="app-header-form">
             <form onSubmit={handleSearch}>
@@ -53,7 +49,7 @@ const Header = () => {
                 spellCheck="false" />
 
               <button type="submit" className="">
-                <img src="./images/icon-search.png" alt="icon-search" className="app-header-search" />
+                <img src="/images/icon-search.png" alt="icon-search" className="app-header-search" />
               </button>
             </form>
           </div>
@@ -63,4 +59,4 @@ const Header = () => {
   );
 }
 
-export default Header
+export default Header;

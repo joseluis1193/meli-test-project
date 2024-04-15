@@ -23,7 +23,7 @@ app.get("/api/items", addAuthor, async (req, res) => {
   try {
     const search = req.query.query;
 
-    const { data } = await axios.get(`${API_URL}/sites/MLA/search?q=${search}`);
+    const { data } = await axios.get(`${API_URL}/sites/MLA/search?q=${search}&limit=4`);
 
     const getCategories = () => {
       return data.filters
@@ -35,8 +35,14 @@ app.get("/api/items", addAuthor, async (req, res) => {
         );
     };
 
-    const getItems = () => {
-      return data.results.slice(0, 4).map((element) => ({
+    const getSellerAddress = async (sellerId) => {
+      const { data } = await axios.get(`${API_URL}/users/${sellerId}`);
+
+      return data.address.city;
+    };
+
+    const getItems = async () => {
+      return await Promise.all(data.results.map(async (element) => ({
         id: element.id,
         title: element.title,
         price: {
@@ -46,8 +52,9 @@ app.get("/api/items", addAuthor, async (req, res) => {
         },
         picture: element.thumbnail,
         condition: element.condition,
-        free_shipping: element.shipping.free_shipping
-      }))
+        free_shipping: element.shipping.free_shipping,
+        seller_address: await getSellerAddress(element.seller.id)
+      })));
     };
 
     const filteredData = {
@@ -56,7 +63,54 @@ app.get("/api/items", addAuthor, async (req, res) => {
         lastname: res.locals.lastname
       },
       categories: getCategories(),
-      items: getItems()
+      items: await getItems()
+    };
+
+    res.json(filteredData);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send("Error server");
+  }
+});
+
+app.get("/api/items/:id", addAuthor, async (req, res) => {
+  try {
+    const itemId = req.params.id;
+
+    const { data } = await axios.get(`${API_URL}/items/${itemId}`);
+
+    const getCategory = async (categoryId) => {
+      const { data } = await axios.get(`${API_URL}/categories/${categoryId}`);
+
+      return data.name;
+    };
+
+    const getDescription = async () => {
+      const { data } = await axios.get(`${API_URL}/items/${itemId}/description`);
+
+      return data.plain_text;
+    };
+
+    const filteredData = {
+      author: {
+        name: res.locals.name,
+        lastname: res.locals.lastname
+      },
+      item: {
+        id: data.id,
+        title: data.title,
+        category: await getCategory(data.category_id),
+        price: {
+          currency: data.currency_id,
+          amount: removeDecimals(data.price),
+          decimals: getDecimals(data.price)
+        },
+        picture: data.thumbnail,
+        condition: data.condition,
+        free_shipping: data.shipping.free_shipping,
+        sold_quantity: data.sold_quantity,
+        description: await getDescription()
+      }
     };
 
     res.json(filteredData);
