@@ -1,11 +1,11 @@
 import axios from "axios";
 
 // Constants
-import { GET_PRODUCTS } from "../constants"
+import { ITEMS_URL } from "../constants"
 
 export const searchService = async (search) => {
   try {
-    const { data } = await axios.get(GET_PRODUCTS, {
+    const { data } = await axios.get(ITEMS_URL, {
       params: {
         query: search
       }

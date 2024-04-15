@@ -1,15 +1,25 @@
+import { useContext } from "react";
 import "./styles.scss";
 
 import Breadcrumb from "../../components/Breadcrumb";
 import Item from "../../components/Item";
 
+// Context
+import SearchContext from "../../context/SearchContext";
+
 const Results = () => {
+  const { searchResults } = useContext(SearchContext);
+
   return (
-    <div className="app-results-container">
-      <Breadcrumb />
-      <Item />
-    </div>
+    <>
+      {searchResults &&
+        <div className="app-results-container">
+          <Breadcrumb />
+          <Item />
+        </div>
+      }
+    </>
   );
 }
 
-export default Results
+export default Results;
