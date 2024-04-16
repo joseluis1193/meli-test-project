@@ -82,7 +82,7 @@ app.get("/api/items/:id", addAuthor, async (req, res) => {
     const getCategory = async (categoryId) => {
       const { data } = await axios.get(`${API_URL}/categories/${categoryId}`);
 
-      return data.name;
+      return [data.name];
     };
 
     const getDescription = async () => {

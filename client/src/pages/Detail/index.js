@@ -11,7 +11,7 @@ import DetailContext from "../../context/DetailContext";
 const Detail = () => {
   const { id } = useParams();
 
-  const { detailResult, setId } = useContext(DetailContext);
+  const { item, isLoading, setId } = useContext(DetailContext);
 
   useEffect(() => {
     setId(id);
@@ -20,11 +20,13 @@ const Detail = () => {
 
   return (
     <>
-      <Breadcrumb />
-      {detailResult &&
+      {!isLoading && item ?
         <div className="app-detail-container">
+          <Breadcrumb categories={item.category} />
           <Card />
         </div>
+        :
+        null
       }
     </>
   );
