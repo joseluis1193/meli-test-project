@@ -1,4 +1,6 @@
 .app-results-container {
+  min-height: calc(100vh - 60px);
+  overflow-y: auto;
   padding: 0 90px 90px;
   width: 100%;
   max-width: 1000px;

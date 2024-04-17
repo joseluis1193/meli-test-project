@@ -14,7 +14,7 @@ const Results = () => {
     <>
       {searchResults &&
         <div className="app-results-container">
-          <Breadcrumb />
+          <Breadcrumb categories={searchResults.categories} />
           <Item />
         </div>
       }

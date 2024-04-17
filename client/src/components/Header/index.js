@@ -18,11 +18,14 @@ const Header = () => {
   const handleSearch = async (event) => {
     event.preventDefault();
 
-    setSearch(value);
-    navigate({
-      pathname: value ? "/items" : "/",
-      search: value ? `?search=${value}` : ""
-    });
+    if (value) {
+      setSearch(value);
+
+      navigate({
+        pathname: "/items",
+        search: `?search=${value}`
+      });
+    }
   };
 
   useEffect(() => {
