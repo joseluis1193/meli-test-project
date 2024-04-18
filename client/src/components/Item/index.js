@@ -16,7 +16,7 @@ const Item = () => {
 
   return (
     <>
-      <ol className="app-item-ol">
+      <ul className="app-item-ul">
         {searchResults && searchResults.items.map((result) => (
           <li key={result.id} className="app-item-li">
             <img
@@ -53,7 +53,7 @@ const Item = () => {
             </div>
           </li>
         ))}
-      </ol>
+      </ul>
     </>
   );
 }

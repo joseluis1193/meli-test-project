@@ -25,14 +25,34 @@ app.get("/api/items", addAuthor, async (req, res) => {
 
     const { data } = await axios.get(`${API_URL}/sites/MLA/search?q=${search}&limit=4`);
 
-    const getCategories = () => {
-      return data.filters
-        .filter((filter) => filter.id === "category")
-        .flatMap((filter) =>
-          filter.values.flatMap((value) =>
-            value.path_from_root.map((path) => path.name)
-          )
-        );
+    const getCategory = async (categoryId) => {
+      const { data } = await axios.get(`${API_URL}/categories/${categoryId}`);
+
+      return [data.name];
+    };
+
+    const getCategoryMostRepeated = (results) => {
+      const count = results.reduce((acc, result) => {
+        acc[result.category_id] = (acc[result.category_id] || 0) + 1;
+
+        return acc;
+      }, {});
+
+      return Object.keys(count).reduce((a, b) => count[a] >= count[b] ? a : b);
+    }
+
+    const getCategories = async () => {
+      if (data.filters.length > 0) {
+        return data.filters
+          .filter((filter) => filter.id === "category")
+          .flatMap((filter) =>
+            filter.values.flatMap((value) =>
+              value.path_from_root.map((path) => path.name)
+            )
+          );
+      } else {
+        return await getCategory(getCategoryMostRepeated(data.results));
+      }
     };
 
     const getSellerAddress = async (sellerId) => {
@@ -62,7 +82,7 @@ app.get("/api/items", addAuthor, async (req, res) => {
         name: res.locals.name,
         lastname: res.locals.lastname
       },
-      categories: getCategories(),
+      categories: await getCategories(),
       items: await getItems()
     };
 
