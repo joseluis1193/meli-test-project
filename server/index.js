@@ -56,6 +56,10 @@ app.get("/api/items", addAuthor, async (req, res) => {
     };
 
     const getSellerAddress = async (sellerId) => {
+      if (!sellerId) {
+        return null;
+      }
+
       const { data } = await axios.get(`${API_URL}/users/${sellerId}`);
 
       return data.address.city;
@@ -73,20 +77,25 @@ app.get("/api/items", addAuthor, async (req, res) => {
         picture: element.thumbnail,
         condition: element.condition,
         free_shipping: element.shipping.free_shipping,
-        seller_address: await getSellerAddress(element.seller.id)
+        seller_address: await getSellerAddress(element.seller?.id)
       })));
     };
 
-    const filteredData = {
-      author: {
-        name: res.locals.name,
-        lastname: res.locals.lastname
-      },
-      categories: await getCategories(),
-      items: await getItems()
-    };
+    if (data.results.length > 0) {
+      const filteredData = {
+        author: {
+          name: res.locals.name,
+          lastname: res.locals.lastname
+        },
+        categories: await getCategories(),
+        items: await getItems()
+      };
 
-    res.json(filteredData);
+      res.json(filteredData);
+      return;
+    }
+
+    res.status(404).send("Item does not exist");
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Error server");
@@ -140,6 +149,10 @@ app.get("/api/items/:id", addAuthor, async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running in port: ${PORT}`);
-});
+if (process.env.NODE_ENV !== "test") {
+  app.listen(PORT, () => {
+    console.log(`Server running in port: ${PORT}`);
+  });
+}
+
+module.exports = app;

@@ -51,7 +51,7 @@ const Header = () => {
                 autoCorrect="off"
                 spellCheck="false" />
 
-              <button type="submit" className="">
+              <button type="submit">
                 <img src="/images/icon-search.png" alt="icon-search" className="app-header-search" />
               </button>
             </form>
