@@ -1,5 +1,7 @@
+@import "../styles/variables";
+
 main {
   display: flex;
   justify-content: center;
-  background-color: #eeeeee;
+  background-color: $color-1;
 }

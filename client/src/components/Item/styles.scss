@@ -1,3 +1,5 @@
+@import "../../styles/variables";
+
 .app-item-ul {
   margin: 0;
   list-style: none;
@@ -5,15 +7,15 @@
 
   .app-item-li {
     display: flex;
-    background-color: #fff;
+    background-color: $color-2;
     padding: 16px 0;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid $color-1;
 
     .app-item-image {
       margin: 0 16px;
       width: 180px;
       height: 180px;
-      border-radius: 4px;
+      border-radius: $border-radius-small;
     }
 
     .app-item-info-container {
@@ -24,12 +26,12 @@
         display: flex;
 
         >label {
-          font-size: 24px;
+          font-size: $font-size-24;
           position: relative;
-          color: #333333;
+          color: $color-4;
 
           >span {
-            font-size: 15px;
+            font-size: $font-size-16;
             position: absolute;
             top: 0.2em;
           }
@@ -46,8 +48,8 @@
           align-items: flex-end;
           width: 100%;
           margin-right: 60px;
-          font-size: 12px;
-          color: #666666;
+          font-size: $font-size-12;
+          color: $color-3;
         }
       }
 
@@ -56,10 +58,10 @@
         max-width: 60%;
 
         .app-item-text {
-          font-size: 18px;
-          font-weight: 300;
+          font-size: $font-size-18;
+          font-weight: $font-weight-300;
           line-height: 1.3;
-          color: #333333;
+          color: $color-4;
           text-decoration: none;
         }
       }
