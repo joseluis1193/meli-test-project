@@ -41,10 +41,12 @@ const Card = () => {
         </div>
       </div>
 
-      <div className="app-card-item-description-container">
-        <p className="app-card-item-description-title">{"Descripción del producto"}</p>
-        <p className="app-card-item-description">{item.description}</p>
-      </div>
+      {item?.description && (
+        <div className="app-card-item-description-container">
+          <p className="app-card-item-description-title">{"Descripción del producto"}</p>
+          <p className="app-card-item-description">{item.description}</p>
+        </div>
+      )}
     </div>
   );
 }

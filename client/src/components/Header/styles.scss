@@ -1,8 +1,10 @@
+@import "../../styles/variables";
+
 .app-header-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #FFE600;
+  background-color: $color-header;
   height: 60px;
 
   .app-header {
@@ -10,7 +12,7 @@
     align-items: center;
     padding: 0 90px;
     width: 100%;
-    max-width: 1000px;
+    max-width: $max-width-container;
 
     .app-header-logo {
       height: 30px;
@@ -25,8 +27,8 @@
         justify-content: center;
 
         >input {
-          color: #333333;
-          font-size: 18px;
+          color: $color-4;
+          font-size: $font-size-18;
           border: none;
           text-decoration: none;
           outline: none;
@@ -39,7 +41,7 @@
         }
 
         >button {
-          background-color: #eeeeee;
+          background-color: $color-1;
           border: none;
           text-decoration: none;
           cursor: pointer;

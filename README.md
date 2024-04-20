@@ -42,3 +42,20 @@ node server/index.js & cd client && npm start
 ```
 
 Correr este comando hará que inicie el servidor Node JS y el cliente React al mismo tiempo. El servidor estará disponible en el puerto **3001** y el cliente en http://localhost:3000
+
+### Test
+
+Puedes correr los test tanto del server como del cliente:
+
+- Server
+
+```bash
+npm test
+```
+
+- Client
+
+```bash
+cd client
+npm test
+```

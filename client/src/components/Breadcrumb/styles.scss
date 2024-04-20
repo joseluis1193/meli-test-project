@@ -1,3 +1,5 @@
+@import "../../styles/variables";
+
 .app-breadcrumb-container {
   height: 52px;
 
@@ -8,7 +10,7 @@
 
     li {
       display: inline;
-      font-size: 14px;
+      font-size: $font-size-14;
       color: #999999;
 
       &:not(:last-child)::after {
@@ -18,7 +20,7 @@
       }
 
       &:last-child {
-        font-weight: bold;
+        font-weight: $font-weight-bold;
       }
     }
   }
